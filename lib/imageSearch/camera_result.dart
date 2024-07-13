@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'camera_result.dart';
+import 'imageNotfind.dart';
+
 
 class CameraResultPage extends StatefulWidget {
   final String imagePath;
@@ -31,8 +35,8 @@ class _CameraResultPageState extends State<CameraResultPage> {
             SizedBox(height: 20),
             Text(
               '⊙ 플라스틱 빨대는 부피가 작아서 분리수거가 불가능합니다. 일반쓰레기에 버려주세요.\n\n'
-              '⊙ 플라스틱 컵은 깨끗하게 세척 후  플라스틱에 버려주세요.\n\n'
-              '⊙ 종이 컵홀더는 종이에 버려주세요.\n\n',
+                  '⊙ 플라스틱 컵은 깨끗하게 세척 후  플라스틱에 버려주세요.\n\n'
+                  '⊙ 종이 컵홀더는 종이에 버려주세요.\n\n',
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
@@ -86,6 +90,22 @@ class _CameraResultPageState extends State<CameraResultPage> {
                 ),
               ),
             ],
+            Spacer(),  // 남은 공간을 차지하도록
+            GestureDetector(
+              onTap: () => imgError(context), // imgError 함수 호출
+              child: Container(
+                padding: EdgeInsets.all(8.0),
+                color: Colors.transparent,
+                alignment: Alignment.bottomCenter,
+                child: Text(
+                  '이미지 인식 결과가 달라요!',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

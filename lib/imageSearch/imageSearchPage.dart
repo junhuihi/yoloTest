@@ -5,10 +5,22 @@ import 'camera_result.dart';
 class CameraScreen extends StatelessWidget {
   final ImagePicker _picker = ImagePicker();
 
-  @override
   Future<void> _takePicture(BuildContext context) async {
     final XFile? pickedFile =
-        await _picker.pickImage(source: ImageSource.camera);
+    await _picker.pickImage(source: ImageSource.camera);
+    if (pickedFile != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CameraResultPage(imagePath: pickedFile.path),
+        ),
+      );
+    }
+  }
+
+  Future<void> _pickImage(BuildContext context) async {
+    final XFile? pickedFile =
+    await _picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       Navigator.push(
         context,
@@ -31,9 +43,31 @@ class CameraScreen extends StatelessWidget {
         ),
       ),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () => _takePicture(context), // 카메라 열기
-          child: Text('카메라로 찍기'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () => _takePicture(context), // 카메라 열기
+              child: Text('카메라로 찍기'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFF6AC99F), // 버튼 배경색 설정
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.zero, // 사각형 모양
+                ),
+              ),
+            ),
+            SizedBox(height: 20), // 버튼 사이 간격
+            ElevatedButton(
+              onPressed: () => _pickImage(context), // 이미지 가져오기
+              child: Text('이미지 가져오기'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFF6AC99F), // 버튼 배경색 설정
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.zero, // 사각형 모양
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

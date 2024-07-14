@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'categories/home.dart';
 import 'package:image_picker/image_picker.dart';
-import 'imageSearch/camera_result.dart'; // CameraResultPage를 임포트
+import 'imageSearch/camera_result.dart';
 import 'imageSearch/imageNotfind.dart';
 import 'imageSearch/imageSearchPage.dart';
 import 'sets/settingPage.dart';

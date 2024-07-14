@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../imageSearch/imageNotfind.dart';
 
 //설정화면
 class Settingpage extends StatefulWidget {
@@ -31,6 +32,10 @@ class _Settingpage extends State<Settingpage> {
       ),
       body: ListView(children: <Widget>[
         ListTile(
+          title: Text('버전 0.0.1'),
+        ),
+        Divider(height: 1),
+        ListTile(
           title: Text('개발자 정보'),
           onTap: () {
             teamInfo(context);
@@ -38,7 +43,11 @@ class _Settingpage extends State<Settingpage> {
         ),
         Divider(height: 1),
         ListTile(
-          title: Text('버전 0.0.1'),
+          title: Text('문의하기'),
+          onTap: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => Askpage()));
+          },
         ),
         Divider(height: 1),
       ]),
@@ -87,11 +96,80 @@ class _Settingpage extends State<Settingpage> {
   }
 }
 
-/*
-리스트 참고: 
-https://nayotutorial.tistory.com/54
-https://pythonkim.tistory.com/122
+//문의하기 페이지
+class Askpage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _Askpage();
+}
 
-https://initstory.tistory.com/131
+class _Askpage extends State<Askpage> {
+  TextEditingController askName1 = TextEditingController();
+  TextEditingController askName2 = TextEditingController();
 
-*/
+  @override
+  void dispose() {
+    askName1.dispose();
+    askName2.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Color(0xFF6AC99F),
+          title: Text(
+            '문의하기',
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+        ),
+        body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              SizedBox(height: 10.0), // 간격
+              Text('제목', style: TextStyle(fontSize: 16)),
+              TextField(
+                controller: askName1,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              SizedBox(height: 20.0), // 간격
+              Text('내용', style: TextStyle(fontSize: 16)),
+              TextField(
+                minLines: 6,
+                maxLines: 6,
+                controller: askName2,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              Center(
+                child: Container(
+                  width: 250,
+                  height: 50,
+                  padding: EdgeInsets.all(0),
+                  margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                  child: TextButton(
+                    onPressed: () => {
+                      if (askName1.text == '' || askName2.text == '')
+                        inputIsNull(context)
+                      else
+                        BtnPopup(context)
+                    },
+                    style: TextButton.styleFrom(
+                      backgroundColor: Color(0xFF6AC99F),
+                      shape: RoundedRectangleBorder(),
+                    ),
+                    child: Text(
+                      '문의 접수하기',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+            ])));
+  }
+}

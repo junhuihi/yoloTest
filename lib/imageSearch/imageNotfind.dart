@@ -180,7 +180,7 @@ void inputIsNull(BuildContext context) {
     builder: (BuildContext context) {
       return AlertDialog(
         title: Text(
-          '텍스트를 입력해주세요',
+          '내용을 입력해주세요',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 20,

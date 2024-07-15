@@ -1,6 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_application_1/main.dart';
 import 'vinyl_page.dart';
 import 'plastic_page.dart';
 import 'paper_page.dart';
@@ -19,16 +20,37 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final List<Map<String, dynamic>> oxQuestions = [
     {
-      'question': '보조배터리,\n일반쓰레기에 버린다?',
+      'question': '보조배터리,\n일반쓰레기에 버린다.',
       'answer': true,
+      'background': 'assets/images/OX퀴즈 배경.png',
+      'question_answer':
+          '건전지, 보조배터리 등 폐건전지류는 재활용이 가능하므로 주요거점(동 행정복지센터, 편의점, 아파트 등)의 전용수거함에 배출합니다.',
     },
     {
-      'question': '플라스틱 재활용은 환경에 해를 끼친다.',
+      'question': '유통기한 지난 마요네즈,\n일반쓰레기에 버린다.',
       'answer': false,
+      'background': 'assets/images/OX퀴즈 배경.png',
+      'question_answer':
+          '마요네즈, 버터 등 기름이 많은 음식물은 녹이지 않은 채로 키친타월이나 신문에 싸서 일반쓰레기로 배출합니다.',
     },
     {
-      'question': '종이 재활용은 무조건 환경에 이로운 방법이다.',
+      'question': '우산,\n일반쓰레기에 버린다.',
       'answer': true,
+      'background': 'assets/images/OX퀴즈 배경.png',
+      'question_answer':
+          '우산 뼈대와 원단을 분리하여 재질에 맞게 배출합니다. 일반적으로 뼈대는 캔류(철), 불투명 원단은 일반쓰레기, 투명 비닐 원단은 비닐로 배출합니다.',
+    },
+    {
+      'question': '택배 비닐 포장지,\n비닐에 버린다.',
+      'answer': true,
+      'background': 'assets/images/OX퀴즈 배경.png',
+      'question_answer': '운송장 스티커를 제거한 후, 비닐류로 배출합니다. 운송장 스티커를 일반쓰레기로 배출합니다.',
+    },
+    {
+      'question': 'L자 화일,\n일반쓰레기에 버린다.',
+      'answer': true,
+      'background': 'assets/images/OX퀴즈 배경.png',
+      'question_answer': '이물질을 제거한 후 불투명 재질은 플라스틱류, 투명 재질은 페트류로 배출합니다.',
     },
   ];
 
@@ -64,30 +86,75 @@ class _HomeState extends State<Home> {
   }
 
   void _showResultDialog(bool answeredCorrectly) {
-    String resultText = answeredCorrectly ? '맞았습니다!' : '틀렸습니다!';
-    Color resultColor = answeredCorrectly ? Colors.green : Colors.red;
+    String resultText = answeredCorrectly ? '정답입니다' : '오답입니다';
+    IconData resultIcon =
+        answeredCorrectly ? Icons.radio_button_unchecked : Icons.close;
 
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('결과'),
-          content: Text(
-            resultText,
-            style: TextStyle(
-              color: resultColor,
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(0.0),
+          ),
+          contentPadding: EdgeInsets.all(20.0),
+          titlePadding: EdgeInsets.all(0),
+          title: Container(
+            padding: EdgeInsets.symmetric(vertical: 0.0),
+            decoration: BoxDecoration(
+              color: Color(0xffAFDEC9),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 98.0),
+                  child: Text(
+                    resultText,
+                    style: TextStyle(
+                      color: const Color(0xff585858),
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.close, color: Colors.black),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
             ),
           ),
-          actions: <Widget>[
-            TextButton(
-              child: Text('확인'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+          content: SingleChildScrollView(
+            child: Container(
+              height: 170, // 컨테이너 높이 설정
+              width: 150,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center, // 수직 정렬
+                crossAxisAlignment: CrossAxisAlignment.center, // 수평 정렬
+                children: [
+                  Icon(
+                    resultIcon,
+                    color: Color(0xffAFDEC9),
+                    size: 50.0,
+                  ),
+                  SizedBox(height: 20.0),
+                  Text(
+                    oxQuestions[currentQuestionIndex]['question_answer'] ??
+                        '해설 표시 에러',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15.0,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ],
+          ),
         );
       },
     );
@@ -141,7 +208,10 @@ class _HomeState extends State<Home> {
                           margin: EdgeInsets.symmetric(horizontal: 7.0),
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage('assets/images/OX퀴즈 배경.png'),
+                              image: AssetImage(
+                                questionData['background'] ??
+                                    'assets/images/OX퀴즈 배경.png',
+                              ),
                               fit: BoxFit.cover,
                             ),
                           ),

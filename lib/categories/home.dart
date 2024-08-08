@@ -189,9 +189,13 @@ class _HomeState extends State<Home> {
                 CarouselSlider(
                   options: CarouselOptions(
                     height: 200.0,
-                    enableInfiniteScroll: false,
+                    enableInfiniteScroll: true,
                     initialPage: 0,
                     viewportFraction: 1.0,
+                    autoPlay: true,
+                    autoPlayInterval: Duration(seconds: 3),
+                    autoPlayAnimationDuration: Duration(milliseconds: 800),
+                    autoPlayCurve: Curves.easeInOut,
                     onPageChanged: (index, reason) {
                       setState(() {
                         currentQuestionIndex = index;
@@ -203,7 +207,6 @@ class _HomeState extends State<Home> {
                       builder: (BuildContext context) {
                         return Container(
                           width: MediaQuery.of(context).size.width,
-                          margin: EdgeInsets.symmetric(horizontal: 7.0),
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               image: AssetImage(
@@ -219,11 +222,29 @@ class _HomeState extends State<Home> {
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(
                                     20.0, 60.0, 20.0, 10.0),
-                                child: Text(
-                                  questionData['question'],
-                                  style: TextStyle(
-                                      fontSize: 20.0, color: Colors.white),
-                                  textAlign: TextAlign.start,
+                                child: Stack(
+                                  children: [
+                                    // 테두리 역할을 할 텍스트
+                                    Text(
+                                      questionData['question'],
+                                      style: TextStyle(
+                                        fontSize: 20.0,
+                                        foreground: Paint()
+                                          ..style = PaintingStyle.stroke
+                                          ..strokeWidth = 2
+                                          ..color =
+                                              const Color(0xff6AC99F), // 테두리 색상
+                                      ),
+                                    ),
+                                    // 실제 텍스트
+                                    Text(
+                                      questionData['question'],
+                                      style: TextStyle(
+                                        fontSize: 20.0,
+                                        color: Colors.white, // 텍스트 색상
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                               Row(
@@ -281,7 +302,7 @@ class _HomeState extends State<Home> {
                 ),
               ],
             ),
-            SizedBox(height: 20.0),
+            SizedBox(height: 50.0), // 슬라이더 아래 여백 추가
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: GridView.builder(
@@ -289,8 +310,9 @@ class _HomeState extends State<Home> {
                 physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  mainAxisSpacing: 0.0,
+                  mainAxisSpacing: 5.0,
                   crossAxisSpacing: 10.0,
+                  mainAxisExtent: 160.0, // 각 아이템의 높이를 지정
                 ),
                 itemCount: 8,
                 itemBuilder: (context, index) {
@@ -326,6 +348,7 @@ class _HomeState extends State<Home> {
 
                   return Column(
                     children: [
+                      SizedBox(height: 0), // 위 여백을 없앰
                       InkWell(
                         onTap: () {
                           Navigator.push(
@@ -426,6 +449,7 @@ class _HomeState extends State<Home> {
                         ),
                         child: Text(buttonTexts[index]),
                       ),
+                      SizedBox(height: 0), // 여백을 0으로 설정
                     ],
                   );
                 },

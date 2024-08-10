@@ -20,7 +20,7 @@ class PaperPage extends StatelessWidget {
         backgroundColor: const Color(0xff6AC99F),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0), // 전체 패딩 추가
+        padding: const EdgeInsets.all(30.0), // 전체 패딩 추가
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start, // 왼쪽 정렬

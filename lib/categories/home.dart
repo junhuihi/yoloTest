@@ -20,34 +20,34 @@ class _HomeState extends State<Home> {
     {
       'question': '보조배터리,\n일반쓰레기에 버린다.',
       'answer': true,
-      'background': 'assets/images/OX퀴즈 배경.png',
+      'background': 'assets/images/quizBG1.png',
       'question_answer':
           '건전지, 보조배터리 등 폐건전지류는 재활용이 가능하므로 주요거점(동 행정복지센터, 편의점, 아파트 등)의 전용수거함에 배출합니다.',
     },
     {
       'question': '유통기한 지난 마요네즈,\n일반쓰레기에 버린다.',
       'answer': false,
-      'background': 'assets/images/OX퀴즈 배경.png',
+      'background': 'assets/images/quizBG2.png',
       'question_answer':
           '마요네즈, 버터 등 기름이 많은 음식물은 녹이지 않은 채로 키친타월이나 신문에 싸서 일반쓰레기로 배출합니다.',
     },
     {
       'question': '우산,\n일반쓰레기에 버린다.',
       'answer': true,
-      'background': 'assets/images/OX퀴즈 배경.png',
+      'background': 'assets/images/quizBG3.png',
       'question_answer':
           '우산 뼈대와 원단을 분리하여 재질에 맞게 배출합니다. 일반적으로 뼈대는 캔류(철), 불투명 원단은 일반쓰레기, 투명 비닐 원단은 비닐로 배출합니다.',
     },
     {
       'question': '택배 비닐 포장지,\n비닐에 버린다.',
       'answer': true,
-      'background': 'assets/images/OX퀴즈 배경.png',
+      'background': 'assets/images/quizBG4.png',
       'question_answer': '운송장 스티커를 제거한 후, 비닐류로 배출합니다. 운송장 스티커를 일반쓰레기로 배출합니다.',
     },
     {
       'question': 'L자 화일,\n일반쓰레기에 버린다.',
       'answer': true,
-      'background': 'assets/images/OX퀴즈 배경.png',
+      'background': 'assets/images/quizBG5.png',
       'question_answer': '이물질을 제거한 후 불투명 재질은 플라스틱류, 투명 재질은 페트류로 배출합니다.',
     },
   ];
@@ -178,7 +178,14 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('JigujiCamE'),
+        title: Text(
+          'JigujiCamE',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20.0,
+            color: Colors.white,
+          ),
+        ),
         backgroundColor: const Color(0xff6AC99F),
       ),
       body: SingleChildScrollView(

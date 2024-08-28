@@ -1,7 +1,21 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.0.2'
+    }
+}
+
 allprojects {
     repositories {
         google()
         mavenCentral()
+        maven {         // add this repo to use snapshots
+          name 'ossrh-snapshot'
+          url 'https://oss.sonatype.org/content/repositories/snapshots'
+        }
     }
 }
 

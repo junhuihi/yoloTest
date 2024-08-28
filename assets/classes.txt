@@ -1,0 +1,10 @@
+ramenContainer
+plasticContaierLid
+plasticContainer
+battery
+straw
+plasticCup
+ramenContainerLid
+cupHolder
+bottle
+bottleLabel

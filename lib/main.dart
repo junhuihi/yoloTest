@@ -4,13 +4,17 @@ import 'package:image_picker/image_picker.dart';
 import 'imageSearch/camera_result.dart';
 import 'imageSearch/imageNotfind.dart';
 import 'imageSearch/imageSearchPage.dart';
+import 'imageSearch/camera.dart';
 import 'sets/settingPage.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyAppPage(title: 'JigujicamE'),
+      home: MyAppPage(title: 'JigujicamE1'),
     );
   }
 }
@@ -47,7 +51,7 @@ class _MyAppPage extends State<MyAppPage> with SingleTickerProviderStateMixin {
         body: TabBarView(
           children: <Widget>[
             Home(),
-            CameraScreen(),
+            YoloImage(),
             Settingpage(),
           ],
           controller: controller,
